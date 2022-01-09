@@ -10,6 +10,7 @@ abstract class Mapper
     {
         $reg =  \Registry::getInstance();
         $this->pdo = $reg->getPdo();
+         
     }
  
     public function find(int $id) : \DomainObject
@@ -36,14 +37,35 @@ abstract class Mapper
         return $obj;
     }
 
+
+    public function selectAll($params)
+    {   
+        /*
+        if(!$params["orderField"]) $params["orderField"] = "id";
+        if(!$params["orderType"]) $params["orderType"] = "DESC";
+        if(!$params["limit"]) $params["limit"] = 20;
+        */
+        $result = $this->doSelectAll($params);
+        $resObjects = [];
+
+
+        if(\count($result) == 0 ) return false;
+
+        foreach($result as $row){
+            $resObjects[] = $this->createObject ($row) ;
+        }
+        return $resObjects;
+    }
+
     public function insert( $obj )
     {
         $this->dolnsert($obj);
     }
 
     abstract public function update( $object);
-    abstract protected function doCreateObject (array $raw) ;
-    abstract protected function dolnsert ( $object);
+    abstract protected function doSelectAll( $params) : array;
+    abstract protected function doCreateObject ( $raw) ;
+    abstract protected function dolnsert (  &$object);
     abstract protected function selectStmt();
     abstract protected function targetclass () ; 
 }

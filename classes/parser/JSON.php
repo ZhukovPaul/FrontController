@@ -1,23 +1,18 @@
 <?php
 namespace parser;
 
-class JSON
+class JSON implements \Parser
 {
-    private $file; 
-    function __construct($file)
+   
+    public static function parse($file)
     {
-        $reg =  \Registry::getInstance();
-        $this->pdo = $reg->getPdo();
+        if(!file_exists($file)){
+            return false;
+        }
 
-        if(!file_exists($file))
-            echo "File {$file} hasn't existed yet";
-            //$commandContext->setError("File {$file} hasn't existed yet");
-        $this->file = $file;
-    }
-
-    public function parse()
-    {
-        //json_decode($this->file)
+        $fileContent = file_get_contents($file) ;
+        $result = json_decode($fileContent,true);
+        return $result;
     }
     
 }

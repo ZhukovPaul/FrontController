@@ -20,6 +20,7 @@ class Registry
         $this->conf = new Conf();
         $conf = $this->getConf();
         $dbConf = $conf->get("db");
+        
         $pdoObj = new DB\PDOFactory($dbConf["host"],$dbConf["dbName"],$dbConf["user"],$dbConf["pass"]);
         $this->pdo = $pdoObj->getConnectionInstance();
     }

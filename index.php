@@ -1,5 +1,5 @@
 <?
-include "init.php";
+include "autoload.php";
  
 controllers\ApplicationController::run();
  

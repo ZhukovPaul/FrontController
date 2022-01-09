@@ -1,0 +1,7 @@
+
+RewriteBase /
+Options +FollowSymlinks
+RewriteEngine On
+ 
+RewriteRule ^blog/(.*)$ index.php?action=detailBlog&slug=$1 [L]
+ 

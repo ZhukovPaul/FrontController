@@ -17,14 +17,15 @@ class CommandContext
         $this->params[$key] = $val;
     }
 
-    public function get(string $key): string
+    public function get(string $key)
     {
-        if (isset($this->params [$key] ) ) {
+        if (isset($this->params [$key] )  ) {
             return $this->params[$key];
         }
         return null;
     }
-    public function setError($error): void
+
+    public function setError($error) 
     {
         $this->error = $error;
     }

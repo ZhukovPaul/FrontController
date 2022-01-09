@@ -20,6 +20,8 @@ class ApplicationController implements \Controller
 
         if($request->get("action")){
             $commandClass = $request->get("action");
+            //$commandClass = "\command\\".$request->get("action");
+            //echo $commandClass;
         }
         
         $resolver = $this->appRegistry->getResolver();
@@ -32,8 +34,9 @@ class ApplicationController implements \Controller
         $instance->init();
 
         $command = $instance->getCommand( $instance->appRegistry->getRequest() );
+         
         $commandContext = new \command\CommandContext();
-        
+          
         if(!is_null($command)){
             $command->execute($commandContext);
         } 

@@ -12,24 +12,31 @@ class BlogDomain implements \DomainObject
             $body="",
             $description="",
             $product="",
-            $views="",
-            $time_create="";
+            $views,
+            $time_create="",
+            $productId;
 
-    public function __construct($id,$href,$title,$body,$description,$product,$views,$time_create)
+    public function __construct($props)
     {
-        $this->id =$id;
-        $this->href = $href;
-        $this->title = $title;
-        $this->body = $body;
-        $this->description = $description;
-        $this->product = $product;
-        $this->views = $views;
-        $this->time_create = $time_create;
+        $this->id =$props["id"];
+        $this->href = $props["href"];
+        $this->title = $props["title"];
+        $this->body = $props["body"];
+        $this->description = $props["description"];
+        $this->product = $props["product"];
+        $this->views = $props["views"];
+        $this->time_create = $props["time_create"];
+        $this->productId = $props["product_id"];
     }
 
     public function getID()
     {
         return $this->id;
+    }
+
+    public function setID($id)
+    {
+        $this->id = $id;
     }
 
     public function getHref()
@@ -95,6 +102,16 @@ class BlogDomain implements \DomainObject
     public function getViews()
     {
         return $this->views;
+    }
+
+    public function setProductId($value)
+    {
+        $this->productId = $value;
+    } 
+    
+    public function getProductId()
+    {
+        return $this->productId;
     }
 
     public function setViews($value)

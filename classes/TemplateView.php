@@ -11,11 +11,20 @@ class TemplateView
     {
         $context =  $commandContext;
         $tempateName = self::$defaultTemplate;
-
+        
         if($request->get("action"))
             $tempateName = $request->get("action");
-        
 
+        if($request->get("method") == "JSON"){
+            if(file_exists($_SERVER["DOCUMENT_ROOT"]."/views/{$tempateName}.php"))
+                include $_SERVER["DOCUMENT_ROOT"]."/views/{$tempateName}.php";
+
+             
+            return false;
+        } 
+
+         
+        
         include $_SERVER["DOCUMENT_ROOT"].self::$defaultTemplateHeader;
          
         if(  !file_exists($_SERVER["DOCUMENT_ROOT"]."/views/{$tempateName}.php") ){
@@ -24,7 +33,6 @@ class TemplateView
       
         if(file_exists($_SERVER["DOCUMENT_ROOT"]."/views/{$tempateName}.php"))
             include $_SERVER["DOCUMENT_ROOT"]."/views/{$tempateName}.php";
-
 
         include $_SERVER["DOCUMENT_ROOT"].self::$defaultTemplateFooter;
 
