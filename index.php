@@ -1,5 +1,7 @@
 <?
 include "autoload.php";
- 
-controllers\ApplicationController::run();
+
+use controllers\ApplicationController as  AController;
+
+AController::run();
  
